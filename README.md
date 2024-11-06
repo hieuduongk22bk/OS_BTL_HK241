@@ -1,6 +1,6 @@
 # Bài tập lớn Hệ điều hành: L06 Nhóm 1
 
-**HK242: OS Simulation**
+**HK241: OS Simulation**
 
 **Hạn nộp bài**: Chủ Nhật, 12 tháng 1 2025, 12:00 AM [Nộp bài](https://lms.hcmut.edu.vn/mod/assign/view.php?id=452059)
 
