@@ -6,10 +6,10 @@
 
 | MSSV    | Họ và Tên        |
 | ------- | ---------------- |
-| 2012938 | Nguyễn Thành Đạt |
-|         |                  |
-|         |                  |
-|         |                  |
+|DƯƠNG MINH HIẾU  | 2210978 |
+| Nguyễn Đức Duy        |  2210510 |
+|   Vũ Trọng Khánh      |   2211541               |
+
 
 **Hạn nộp bài**: Chủ Nhật, 12 tháng 1 2025, 12:00 AM [Nộp bài](https://lms.hcmut.edu.vn/mod/assign/view.php?id=452059) `assignment STUDENTID.zip`
 
