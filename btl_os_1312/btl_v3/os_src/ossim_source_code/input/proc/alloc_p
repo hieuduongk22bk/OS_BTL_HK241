@@ -1,0 +1,6 @@
+1 4
+alloc 200 0
+alloc 300 1
+free 0
+alloc 100 2
+

@@ -1,0 +1,5 @@
+1 4
+malloc 200 0
+malloc 300 1
+free 0
+malloc 100 2

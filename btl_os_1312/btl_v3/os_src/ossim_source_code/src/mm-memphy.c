@@ -6,7 +6,7 @@
 
 #include "mm.h"
 #include <stdlib.h>
-
+#include <stdio.h>
 /*
  *  MEMPHY_mv_csr - move MEMPHY cursor
  *  @mp: memphy struct
@@ -157,9 +157,29 @@ int MEMPHY_get_freefp(struct memphy_struct *mp, int *retfpn)
 
 int MEMPHY_dump(struct memphy_struct * mp)
 {
-    /*TODO dump memphy contnt mp->storage 
-     *     for tracing the memory content
-     */
+    /* Kiểm tra nếu bộ nhớ không hợp lệ */
+    if (mp == NULL) return -1;
+    printf("Memory Dump (Page-wise):\n");
+    // Duyệt từng trang 
+    for (int i = 0; i < mp->maxsz / 256; ++i) {
+        int startAddr = i * 256; 
+        int sum = 0;
+        for (int j = 0; j < 256; ++j) {
+            sum += mp->storage[startAddr + j];
+        }
+
+        // Nếu tổng khác 0, in trang
+        if (sum != 0) {
+            printf("Frame %d: ",i);
+
+            // In các giá trị trong trang
+            for (int j = 0; j < 256; ++j) {
+                printf("%d ", mp->storage[startAddr + j]);
+            }
+
+            printf("\n");
+        }
+    }
 
     return 0;
 }

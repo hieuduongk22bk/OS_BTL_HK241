@@ -1,0 +1,5 @@
+1 4
+alloc 200 0
+alloc 300 1
+write 5 1 100
+write 10 1 0
