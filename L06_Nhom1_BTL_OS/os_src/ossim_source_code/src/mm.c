@@ -152,8 +152,40 @@ int alloc_pages_range(struct pcb_t *caller, int req_pgnum, struct framephy_struc
    } else {  
 
       // BO SUNG SWAP TRANG NEU TAT CA FRAME TRONG RAM DA DUOC DUNG
+         int vicpgn, swpfpn;
+      if(find_victim_page(caller->mm,&vicpgn) == -1 || MEMPHY_get_freefp(caller->active_mswp,&swpfpn) == -1){
+        printf("Error: Failed to find victim page or free frame in swap\n");
+        return -3000;
+      }
+      // Lay entry cuar trang nan nhan
+      uint32_t vicpte   = caller ->mm->pgd[vicpgn];
+      int vicfpn = PAGING_PTE_FPN(vicpte);// Lay frame trang nan nha
 
+      // Thuc hien swap out trang nan nhan
+      __swap_cp_page(caller->mram,vicfpn,caller->active_mswp,swpfpn);
+
+      // Danh dau trang nan nhan da bi swapped out
+      pte_set_swap(&caller->mm->pgd[vicpgn],0,swpfpn);
+
+      // Tai su dung frame vua giai phong
+      struct framephy_struct *newfp = malloc(sizeof(struct framephy_struct));// Cap phat frame moi
+
+      if(!newfp ){
+        printf("Error: Memory allocation failed.\n");
+        // giai phong cac frame da cap truoc do
+        while(newfp_str != NULL){
+          struct framephy_struct *temp = newfp_str;
+          newfp_str = newfp_str ->fp_next;
+          free(temp);
+        }
+        return -1;
+      }
+      newfp ->fpn= vicfpn;
+      newfp->owner = caller->mm;
+      newfp->fp_next=newfp_str;
+      newfp_str = newfp;
    } 
+
  }
   *frm_lst = newfp_str;
   return 0;
